@@ -1,0 +1,79 @@
+<launch>
+    <arg 
+        name="data_dir" 
+        default="/home/spadmin/catkin_ws_ngp/data/medium_scan_2/"/>
+    <arg 
+        name="bag_name" 
+        default="medium_scan_4.bag"/>
+
+    <include 
+        file="$(find sensors)/Launch/visualization.launch">
+    </include>   
+
+    <include 
+        file="$(find kiss_icp)/launch/odometry.launch">
+    </include>   
+
+    <group ns="/Filter_rslidar">
+        <param 
+            name="sub_topic" 
+            type="str" 
+            value="/rslidar_points" />
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="/rslidar_filtered" />
+        <rosparam 
+            param="lims_p" >
+            [-90, 45]
+        </rosparam>
+        <rosparam 
+            param="lims_r" >
+            [0.5, 100]
+        </rosparam>
+        <node 
+            pkg="sensors" 
+            type="pcl_filter_publisher_node.py" 
+            name="pcl_filter_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/pose_saver">
+        <param 
+            name="topic_pose" 
+            type="str" 
+            value="/kiss/odometry" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param 
+            name="output_format" 
+            type="str" 
+            value="quaternion" />
+        <node 
+            pkg="sensors" 
+            type="pose_saver_node.py" 
+            name="pose_saver_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/Rosbag">
+        <node 
+            pkg="rosbag" 
+            type="record" 
+            name="recorder" 
+            output="screen" 
+            args="--output-name=$(arg data_dir)lidar_filtered.bag /rslidar_filtered"/>
+        <node 
+            pkg="rosbag" 
+            type="play" 
+            name="player" 
+            output="screen" 
+            args="--clock --delay=4 --rate=1.0 $(arg data_dir)$(arg bag_name)"/>
+    </group>
+
+</launch>
+
+
+

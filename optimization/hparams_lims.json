@@ -1,0 +1,25 @@
+{
+    "training":
+    {
+        "pixs_valid_uss": [0.0, 0.9],
+        "pixs_valid_tof": [0.0, 0.9],
+        "tof_loss_w": [0.1, 400.0],
+        "uss_loss_w": [0.1, 400.0],
+        "color_loss_w": [0.1, 10.0]
+    },
+    "occ_grid":
+    {
+        "update_interval": [2.0, 32.0],
+        "decay_warmup_steps": [32.0, 96.0],
+        "batch_ratio_ray_update": [0.1, 0.9],
+        "false_detection_prob_every_m": [0.1, 0.3],
+        "std_every_m": [0.05, 0.5],
+        "nerf_pos_noise_every_m": [0.05, 0.5],
+        "nerf_threshold_max": [0.1, 9.0],
+        "nerf_threshold_slope": [0.08, 0.32]
+    },
+    "ToF":
+    {
+        "tof_pix_size": [1.0, 16.0]
+    }
+}

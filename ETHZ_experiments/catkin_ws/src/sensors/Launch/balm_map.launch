@@ -1,0 +1,111 @@
+<launch>
+
+    <arg 
+        name="data_dir" 
+        default="/home/spadmin/catkin_ws_ngp/data/medium_scan_2/"/>
+
+    <include 
+        file="$(find sensors)/Launch/visualization.launch">
+    </include>   
+
+    <include 
+        file="$(find kiss_icp)/launch/odometry.launch">
+    </include>   
+
+    <group ns="/StaticMapKISS">
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="static_map_kiss" />
+        <param
+            name="pub_freq" 
+            type="double" 
+            value="1.0" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param
+            name="map_name" 
+            type="str" 
+            value="maps/map_kiss.pcd" />
+        <node 
+            pkg="sensors" 
+            type="pcl_static_publisher_node.py" 
+            name="pcl_static_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/StaticMapBALM">
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="static_map_balm" />
+        <param
+            name="pub_freq" 
+            type="double" 
+            value="1.0" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param
+            name="map_name" 
+            type="str" 
+            value="maps/map_balm.pcd" />
+        <node 
+            pkg="sensors" 
+            type="pcl_static_publisher_node.py" 
+            name="pcl_static_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/StaticMapKISS_BALM">
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="static_map_kiss_balm" />
+        <param
+            name="pub_freq" 
+            type="double" 
+            value="1.0" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param
+            name="map_name" 
+            type="str" 
+            value="maps/map_kiss-balm.pcd" />
+        <node 
+            pkg="sensors" 
+            type="pcl_static_publisher_node.py" 
+            name="pcl_static_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/StaticMapBALM_KISS">
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="static_map_balm_kiss" />
+        <param
+            name="pub_freq" 
+            type="double" 
+            value="1.0" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param
+            name="map_name" 
+            type="str" 
+            value="maps/map_balm-kiss.pcd" />
+        <node 
+            pkg="sensors" 
+            type="pcl_static_publisher_node.py" 
+            name="pcl_static_publisher_node" 
+            output="screen" />
+    </group>
+
+</launch>

@@ -1,0 +1,51 @@
+<launch>
+
+    <param 
+        name="port" 
+        type="str"
+        value="/dev/ttyACM0" />
+    <param 
+        name="baud" 
+        type="int"
+        value="115200" />
+    <node 
+        pkg="rosserial_python" 
+        type="serial_node.py" 
+        name="serial_node" >
+    </node>
+
+    <group ns="/LIDAR">
+        <include 
+            file="$(find rslidar_sdk)/launch/start.launch">
+        </include>  
+    </group>  
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="0" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="rs_cam1.launch" />
+        <arg name="node_name" value="timed_roslaunch1" />
+    </include>
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="20" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="rs_cam3.launch" />
+        <arg name="node_name" value="timed_roslaunch3" />
+    </include>
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="40" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="watchdog.launch" />
+        <arg name="node_name" value="timed_roslaunch4" />
+    </include>
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="40" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="rosbag.launch" />
+        <arg name="node_name" value="timed_roslaunch5" />
+    </include>
+
+</launch>

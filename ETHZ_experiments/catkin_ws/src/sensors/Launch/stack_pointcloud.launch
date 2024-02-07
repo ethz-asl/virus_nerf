@@ -1,0 +1,267 @@
+<launch>
+
+    
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="0" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="visualization.launch" />
+        <arg name="node_name" value="timed_tf" />
+    </include>
+
+    <param 
+        name="port" 
+        type="str"
+        value="/dev/ttyACM0" />
+    <param 
+        name="baud" 
+        type="int"
+        value="115200" />
+    <node 
+        pkg="rosserial_python" 
+        type="serial_node.py" 
+        name="serial_node" >
+    </node>
+
+    <include 
+        file="$(find rslidar_sdk)/launch/start.launch">
+    </include>   
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="0" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="rs_cam1.launch" />
+        <arg name="node_name" value="timed_roslaunch1" />
+    </include>
+
+    <!-- <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="20" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="rs_cam2.launch" />
+        <arg name="node_name" value="timed_roslaunch2" />
+    </include> -->
+
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+        <arg name="time" value="20" />
+        <arg name="pkg" value="sensors" />
+        <arg name="file" value="rs_cam3.launch" />
+        <arg name="node_name" value="timed_roslaunch3" />
+    </include>
+
+    <!-- <group ns="/CAM1">
+        <param 
+            name="camera_id" 
+            type="str" 
+            value="CAM1" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="False" />
+        <node 
+            pkg="sensors" 
+            type="rs_log.py" 
+            name="rs_log_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/CAM2">
+        <param 
+            name="camera_id" 
+            type="str" 
+            value="CAM2" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="False" />
+        <node 
+            pkg="sensors" 
+            type="rs_log.py" 
+            name="rs_log_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/CAM3">
+        <param 
+            name="camera_id" 
+            type="str" 
+            value="CAM3" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="False" />
+        <node 
+            pkg="sensors" 
+            type="rs_log.py" 
+            name="rs_log_node" 
+            output="screen" />
+    </group> -->
+
+    <group ns="/USS1">
+        <param 
+            name="uss_id" 
+            type="str" 
+            value="USS1" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="True" />
+        <node 
+            pkg="sensors" 
+            type="uss_log.py" 
+            name="uss_log_node" 
+            output="screen" />
+    </group>
+
+    <!-- <group ns="/USS2">
+        <param 
+            name="uss_id" 
+            type="str" 
+            value="USS2" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="False" />
+        <node 
+            pkg="sensors" 
+            type="uss_log.py" 
+            name="uss_log_node" 
+            output="screen" />
+    </group> -->
+
+    <group ns="/USS3">
+        <param 
+            name="uss_id" 
+            type="str" 
+            value="USS3" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="True" />
+        <node 
+            pkg="sensors" 
+            type="uss_log.py" 
+            name="uss_log_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/TOF1">
+        <param 
+            name="tof_id" 
+            type="str" 
+            value="TOF1" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="True" />
+        <node 
+            pkg="sensors" 
+            type="tof_log.py" 
+            name="tof_log_node" 
+            output="screen" />
+    </group>
+
+    <!-- <group ns="/TOF2">
+        <param 
+            name="tof_id" 
+            type="str" 
+            value="TOF2" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="False" />
+        <node 
+            pkg="sensors" 
+            type="tof_log.py" 
+            name="tof_log_node" 
+            output="screen" />
+    </group> -->
+
+    <group ns="/TOF3">
+        <param 
+            name="tof_id" 
+            type="str" 
+            value="TOF3" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="/home/spadmin/catkin_ws_ngp/data" />
+        <param 
+            name="print_elapse_time" 
+            type="bool" 
+            value="False" />
+        <param 
+            name="publish_pointcloud" 
+            type="bool" 
+            value="True" />
+        <node 
+            pkg="sensors" 
+            type="tof_log.py" 
+            name="tof_log_node" 
+            output="screen" />
+    </group>
+
+</launch>

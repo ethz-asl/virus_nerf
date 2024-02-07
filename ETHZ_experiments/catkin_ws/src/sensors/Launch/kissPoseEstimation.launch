@@ -1,0 +1,70 @@
+<launch>
+    <arg 
+        name="data_dir" 
+        default="/home/spadmin/catkin_ws_ngp/data/corridor/"/>
+    <arg 
+        name="bag_name" 
+        default="corridor.bag"/>
+
+    <include 
+        file="$(find sensors)/Launch/visualization.launch">
+    </include>   
+
+    <include 
+        file="$(find kiss_icp)/launch/odometry.launch">
+    </include>   
+
+    <group ns="/Filter_rslidar">
+        <param 
+            name="sub_topic" 
+            type="str" 
+            value="/rslidar_points" />
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="/rslidar_filtered" />
+        <rosparam 
+            param="lims_p" >
+            [-150, 80]
+        </rosparam>
+        <rosparam 
+            param="lims_r" >
+            [0.5, 100]
+        </rosparam>
+        <node 
+            pkg="sensors" 
+            type="pcl_filter_publisher_node.py" 
+            name="pcl_filter_publisher_node" 
+            output="screen" />
+    </group>
+
+    <!-- <group ns="/pose_saver">
+        <param 
+            name="topic_pose" 
+            type="str" 
+            value="/kiss/odometry" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param 
+            name="output_format" 
+            type="str" 
+            value="quaternion" />
+        <node 
+            pkg="sensors" 
+            type="pose_saver_node.py" 
+            name="pose_saver_node" 
+            output="screen" />
+    </group> -->
+
+    <group ns="/Rosbag">
+        <node 
+            pkg="rosbag" 
+            type="play" 
+            name="player" 
+            output="screen" 
+            args="--clock --delay=4 --rate=1.0 $(arg data_dir)$(arg bag_name)"/>
+    </group>
+
+</launch>

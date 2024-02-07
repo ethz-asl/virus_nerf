@@ -1,0 +1,12 @@
+<launch>
+
+    <group ns="/Watchdog">
+        <node 
+            pkg="sensors" 
+            type="watchdog.py" 
+            name="watchdog_node" 
+            output="screen" />
+    </group>
+
+
+</launch>

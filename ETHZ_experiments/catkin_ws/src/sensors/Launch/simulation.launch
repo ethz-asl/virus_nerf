@@ -1,0 +1,246 @@
+<launch>
+
+    <arg 
+        name="data_dir" 
+        default="/home/spadmin/catkin_ws_ngp/data/medium_scan_2/"/>
+    <arg 
+        name="bag_name" 
+        default="medium_scan_2_sync.bag"/>
+    <arg
+        name="use_balm_poses"
+        default="false"/>
+
+    <include 
+        file="$(find sensors)/Launch/visualization.launch">
+    </include>   
+
+    <include 
+        file="$(find kiss_icp)/launch/odometry.launch">
+    </include>   
+
+    <group ns="/Filter_rslidar">
+        <param 
+            name="sub_topic" 
+            type="str" 
+            value="/rslidar_points" />
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="/rslidar_filtered" />
+        <rosparam 
+            param="lims_p" >
+            [-90, 45]
+        </rosparam>
+        <rosparam 
+            param="lims_r" >
+            [0.5, 100]
+        </rosparam>
+        <node 
+            pkg="sensors" 
+            type="pcl_filter_publisher_node.py" 
+            name="pcl_filter_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/TOF1">
+        <param 
+            name="sensor_id" 
+            type="str" 
+            value="TOF1" />
+        <param 
+            name="pub_frame_id" 
+            type="str" 
+            value="map" />
+        <param 
+            name="use_balm_poses" 
+            type="bool" 
+            value="$(arg use_balm_poses)" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <node 
+            pkg="sensors" 
+            type="pcl_meas_publisher_node.py" 
+            name="pcl_meas_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/USS1">
+        <param 
+            name="sensor_id" 
+            type="str" 
+            value="USS1" />
+        <param 
+            name="pub_frame_id" 
+            type="str" 
+            value="map" />
+        <param 
+            name="use_balm_poses" 
+            type="bool" 
+            value="$(arg use_balm_poses)" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <node 
+            pkg="sensors" 
+            type="pcl_meas_publisher_node.py" 
+            name="pcl_meas_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/CAM1">
+        <param 
+            name="sensor_id" 
+            type="str" 
+            value="CAM1" />
+        <param 
+            name="pub_frame_id" 
+            type="str" 
+            value="map" />
+        <param 
+            name="use_balm_poses" 
+            type="bool" 
+            value="$(arg use_balm_poses)" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <node 
+            pkg="sensors" 
+            type="pcl_meas_publisher_node.py" 
+            name="pcl_meas_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/TOF3">
+        <param 
+            name="sensor_id" 
+            type="str" 
+            value="TOF3" />
+        <param 
+            name="pub_frame_id" 
+            type="str" 
+            value="map" />
+        <param 
+            name="use_balm_poses" 
+            type="bool" 
+            value="$(arg use_balm_poses)" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <node 
+            pkg="sensors" 
+            type="pcl_meas_publisher_node.py" 
+            name="pcl_meas_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/USS3">
+        <param 
+            name="sensor_id" 
+            type="str" 
+            value="USS3" />
+        <param 
+            name="pub_frame_id" 
+            type="str" 
+            value="map" />
+        <param 
+            name="use_balm_poses" 
+            type="bool" 
+            value="$(arg use_balm_poses)" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <node 
+            pkg="sensors" 
+            type="pcl_meas_publisher_node.py" 
+            name="pcl_meas_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/CAM3">
+        <param 
+            name="sensor_id" 
+            type="str" 
+            value="CAM3" />
+        <param 
+            name="pub_frame_id" 
+            type="str" 
+            value="map" />
+        <param 
+            name="use_balm_poses" 
+            type="bool" 
+            value="$(arg use_balm_poses)" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <node 
+            pkg="sensors" 
+            type="pcl_meas_publisher_node.py" 
+            name="pcl_meas_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/StaticMapKISS">
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="static_map_kiss" />
+        <param
+            name="pub_freq" 
+            type="double" 
+            value="1.0" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param
+            name="map_name" 
+            type="str" 
+            value="maps/map_kiss.pcd" />
+        <node 
+            pkg="sensors" 
+            type="pcl_static_publisher_node.py" 
+            name="pcl_static_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/StaticMapBALM">
+        <param 
+            name="pub_topic" 
+            type="str" 
+            value="static_map_balm" />
+        <param
+            name="pub_freq" 
+            type="double" 
+            value="1.0" />
+        <param 
+            name="data_dir" 
+            type="str" 
+            value="$(arg data_dir)" />
+        <param
+            name="map_name" 
+            type="str" 
+            value="maps/map_balm.pcd" />
+        <node 
+            pkg="sensors" 
+            type="pcl_static_publisher_node.py" 
+            name="pcl_static_publisher_node" 
+            output="screen" />
+    </group>
+
+    <group ns="/Rosbag">
+        <node 
+            pkg="rosbag" 
+            type="play" 
+            name="player" 
+            output="screen" 
+            args="--clock --delay=4 --rate=1.0 $(arg data_dir)$(arg bag_name)"/>
+    </group>
+
+</launch>

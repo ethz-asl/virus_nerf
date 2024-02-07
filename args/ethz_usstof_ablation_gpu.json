@@ -1,0 +1,121 @@
+{
+    "dataset":
+    {
+        "name": "ETHZ",
+        "split_ratio": {"train": 0.8, "val": 0.1, "test": 0.1},
+        "keep_N_observations": "all",
+        "keep_sensor": "all",
+        "sensors": ["RGBD", "USS", "ToF"]
+    },
+    "model":
+    {
+        "ckpt_path": false, 
+        "scale": 0.5,
+        "encoder_type": "hash",
+        "hash_levels": 16,
+        "hash_max_res": 1024,
+        "grid_type": "occ",
+        "save": true
+    },
+    "training":
+    {
+        "batch_size": 4096,
+        "sampling_strategy": 
+        {
+            "imgs": "all", 
+            "pixs": {"random":1.0}
+        },
+        "sensors": [],
+        "max_steps": 800,
+        "max_time": 80,
+        "lr": 5e-3,
+        "rgbd_loss_w": 100.0,
+        "tof_loss_w": 50.0,
+        "uss_loss_w": 50.0,
+        "color_loss_w": 1.0,
+        "debug_mode": true,
+        "real_time_simulation": false
+    },
+    "evaluation":
+    {
+        "batch_size": 8192,
+        "res_map": 512,
+        "res_angular": 512,
+        "eval_every_n_steps": 25,
+        "num_color_pts": 8,
+        "num_depth_pts": "all",
+        "num_depth_pts_per_step": 16,
+        "num_plot_pts": 8,
+        "height_tolerance": 0.05,
+        "density_map_thr": 10,
+        "inlier_threshold": 0.1,
+        "zones": {
+            "zone1": [0, 1],
+            "zone2": [0, 2],
+            "zone3": [0, 100]
+        },
+        "sensors": ["GT", "USS", "ToF", "LiDAR", "NeRF"],
+        "plot_results": true
+    },
+    "ngp_grid":
+    {
+        "update_interval": 16,
+        "warmup_steps": 256
+    },
+    "occ_grid":
+    {
+        "batch_size": 1024,
+        "update_interval": 16,
+        "decay_warmup_steps": 80,
+        "batch_ratio_ray_update": 0.5,
+        "false_detection_prob_every_m": 0.3,
+        "std_every_m": 0.2,
+        "nerf_pos_noise_every_m": 0.2,
+        "nerf_threshold_max": 5.91,
+        "nerf_threshold_slope": 0.01
+    },
+    "ethz":
+    {
+        "dataset_dir": "/media/scratch1/schmin/data/ETHZDataset",
+        "room": "commonroom",
+        "cam_ids": ["CAM1", "CAM3"],
+        "use_optimized_poses": true
+    },
+    "RH2":
+    {
+        "dataset_dir": "/media/scratch1/schmin/data/robot_at_home",
+        "session": "session_2",
+        "home": "anto",
+        "room": "livingroom1",
+        "subsession": "subsession_1",
+        "home_session": "s1"
+    },
+    "RGBD":
+    {
+        "angle_of_view": [90, 65]
+    },
+    "USS":
+    {
+        "angle_of_view": [55, 35]
+    },
+    "ToF":
+    {
+        "angle_of_view": [45, 45],
+        "matrix": [8, 8],
+        "tof_pix_size": 1,
+        "sensor_calibration_error": 0.0,
+        "sensor_random_error": 0.0
+    },
+    "LiDAR":
+    {
+        "angle_min_max": {
+            "office": [-120, 120],
+            "office2": [-80, 80],
+            "commonroom": [-140, 60],
+            "commonroom2": [-90, 45],
+            "corridor": [-80, 80]
+
+        }
+    }
+    
+}

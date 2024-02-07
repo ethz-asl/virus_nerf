@@ -1,0 +1,16 @@
+<launch>
+    <group ns="/Rosbag">
+        <arg 
+            name="path" 
+            default="/home/spadmin/catkin_ws_ngp/data/office_2/office_2_2_sync.bag" />
+     <node 
+            pkg="rosbag" 
+            type="play" 
+            name="player" 
+            output="screen" 
+            args="--clock $(arg path)"/>
+    </group>
+
+</launch>
+
+   

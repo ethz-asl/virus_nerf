@@ -1,0 +1,37 @@
+<launch>
+
+
+    <node 
+        pkg="rosbag" 
+        type="record" 
+        name="rosbag_record_cam"
+        args="record -O $(find sensors)/../../data/rosbag  
+            /CAM1/aligned_depth_to_color/image_raw 
+            /CAM1/color/image_raw
+            /CAM1/infra1/image_rect_raw
+            /CAM1/infra2/image_rect_raw
+            /CAM1/accel/imu_info
+            /CAM1/accel/metadata
+            /CAM1/accel/sample
+            /CAM1/gyro/imu_info
+            /CAM1/gyro/metadata
+            /CAM1/gyro/sample
+            /CAM1/depth/color/points
+            /CAM3/aligned_depth_to_color/image_raw 
+            /CAM3/color/image_raw
+            /CAM3/infra1/image_rect_raw
+            /CAM3/infra2/image_rect_raw
+            /CAM3/accel/imu_info
+            /CAM3/accel/metadata
+            /CAM3/accel/sample
+            /CAM3/gyro/imu_info
+            /CAM3/gyro/metadata
+            /CAM3/gyro/sample
+            /CAM3/depth/color/points
+            /USS1 
+            /USS3 
+            /TOF1 
+            /TOF3
+            /rslidar_points" />
+
+</launch>
