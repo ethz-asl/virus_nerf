@@ -24,7 +24,7 @@ exhibits performance akin to USSs. Through an in-depth ablation study, three key
 * Utilizing _Instant-NGP_ for mapping yields poor results. The assistance of the camera with depth sensors is imperative
 given the sparse measurements typical in mobile robotics.
 * The proposed occupancy grid in _VIRUS-NeRF_ augments mapping performance and training efficiency. 
-* Optimization of the large hyper-parameter space via particle swarm optimization and refinement of poses through bundle
+* Particle Swarm Optimization (PSO) of the large hyper-parameter space and refinement of poses through bundle
 adjustment enhances accuracy.
 
 Limitations such as accuracy constraints, hyper-parameter generalization issues, and convergence speed are discussed and 
