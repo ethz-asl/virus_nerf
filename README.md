@@ -25,7 +25,7 @@ Overall, _VIRUS-NeRF_ presents a promising approach for cost-effective local map
 2. Clone this repository
 3. Make sure that the requirements indicated in _requirements.txt_ are met
 
-### ETHZ Experiments
+### Dataset Collection
 1. Install ROS1
 2. Create a catkin workspace in _USS_experiments/catkin_ws_
 3. Install the following packages inside _USS_experiments/catkin_ws/src_ to create a new dataset:
@@ -52,7 +52,7 @@ Choose the desired hyper-parameters as described below. Then execute one of the 
 2. Flash Arduino with the desired script
 3. Execute _USS_experiments/read_data.py_
 
-### ETHZ Experiments
+### Dataset Collection
 1. Connect Arduino and sensor stacks (USS, IRS and camera)
 2. Flash Arduino with _ETHZ_experimens/Arduino/sensor_stack/sensor_stack.ino_
 3. Navigate to: _ETHZ_experimens/catkin_ws/src/sensors/_
