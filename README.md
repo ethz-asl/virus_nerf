@@ -1,37 +1,22 @@
 # Project
 
 ## General
-* Type: Master's Thesis
-* Author: Nicolaj Schmid (nicolaj.schmid@epfl.ch)
-* Supervisors: Cornelius von Einem, Florian Tschopp and Lorenz Hruby
-* Professors: Roland Siegwart and Colin Jones
-* Universities: ETHZ and EPFL
-* Labs: Autonomous Systems Lab and Predictive Control Lab
+* Name: VIRUS-NeRF - Vision, InfraRed and UltraSonic based Neural Radiance Fields
+* Authors: Nicolaj Schmid (nicolaj.schmid@epfl.ch), Cornelius von Einem, Cesar Cadena, Roland Siegwart, Lorenz Hruby and Florian Tschopp
+* Keywords: local mapping, NeRF, implicit neural representation, Instant-NGP, occupancy grid, low-cost sensors, infrared sensor, ultrasonic sensor, camera
 
 ## Abstract
-This research strives to leverage cost-effective sensors for local mapping applications in mobile robotics. 
-The study introduces _VIRUS-NeRF_ - _Vision, InfraRed, and UltraSonic based Neural Radiance Fields_. 
-While traditional mapping techniques often rely on expensive sensors like light detection and ranging (LiDAR) or 
-RGB-D cameras, _VIRUS-NeRF_ integrates low-cost sensors while using neural radiance fields (NeRFs) for scene representation. 
-By exhaustive sensor analysis and testing, the URM37 could be identified as the optimal ultrasonic sensor (USS). 
-Building upon _Instant Neural Graphics Primitives_ (_Instant-NGP_), _VIRUS-NeRF_ incorporates 
-depth measurements from USSs and infrared sensors (IRSs) and advances the occupancy grid utilized for ray marching. 
-Experimental evaluation conducted at ETHZ demonstrates that _VIRUS-NeRF_ achieves comparable mapping 
-performance to LiDAR point clouds in terms of coverage, and surpasses USS and IRS scans. Notably, in environments with 
-optimized parameters, its accuracy aligns with that of LiDAR measurements, while in less optimized settings, it 
-exhibits performance akin to USSs. Through an in-depth ablation study, three key factors of NeRF-based mapping are identified: 
+Autonomous mobile robots are an increasingly integral part of modern factory and warehouse operations. 
+Obstacle detection, avoidance and path planning are critical safety-relevant tasks, which are often solved using expensive LiDAR sensors and depth cameras. 
+We propose to use cost-effective low-resolution ranging sensors, such as ultrasonic and infrared time-of-flight sensors by developing _VIRUS-NeRF_ - _Vision, InfraRed, and UltraSonic based Neural Radiance Fields_.
 
-* Utilizing _Instant-NGP_ for mapping yields poor results. The assistance of the camera with depth sensors is imperative
-given the sparse measurements typical in mobile robotics.
-* The proposed occupancy grid in _VIRUS-NeRF_ augments mapping performance and training efficiency. 
-* Particle Swarm Optimization (PSO) of the large hyper-parameter space and refinement of poses through bundle
-adjustment enhances accuracy.
+Building upon Instant-NGP, _VIRUS-NeRF_ incorporates depth measurements from ultrasonic and infrared sensors and utilizes them to update the occupancy grid used for ray marching.
+Experimental evaluation in 2D demonstrates that _VIRUS-NeRF_ achieves comparable mapping performance to LiDAR point clouds regarding coverage.
+Notably, in small environments, its accuracy aligns with that of LiDAR measurements, while in larger ones, it is bounded by the utilized ultrasonic sensors.
+An in-depth ablation study reveals that adding ultrasonic and infrared sensors is highly effective when dealing with sparse data and low view variation.
+Further, the proposed occupancy grid of _VIRUS-NeRF_ improves the mapping capabilities and increases the training speed by 46% compared to _Instant-NGP_.
+Overall, _VIRUS-NeRF_ presents a promising approach for cost-effective local mapping in mobile robotics, with potential applications in safety and navigation tasks.
 
-Limitations such as accuracy constraints, hyper-parameter generalization issues, and convergence speed are discussed and 
-accompanied by possible solutions. Overall, _VIRUS-NeRF_ presents a promising approach for cost-effective local mapping 
-in mobile robotics, with potential applications in safety and navigation tasks. 
-
-__Keywords__: local mapping, NeRF, implicit neural representation, Instant-NGP, occupancy grid, low-cost sensors, infrared sensor, ultrasonic sensor, camera
 
 # Code
 ## Installation
