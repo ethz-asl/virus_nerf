@@ -139,14 +139,13 @@ USS | sensor_random_error | add random error to IRS (ToF) depth measurement in m
 LiDAR | angle_min_max | field of view of LiDAR for given rooms | dict of lists | 
 
 # Citations
-For a complete list of citations please refer to the report.
 
 ## Code
 The [Taichi](https://github.com/Linyou/taichi-ngp-renderer "taichi_ngp")  _Instant-NGP_ implementation is used for this project. 
 All [Taichi](https://github.com/Linyou/taichi-ngp-renderer "taichi_ngp") code is contained inside the _modules_ directory 
-(except of _modules/grid.py_ and _modules/occupancy_grid.py_ which are written by myself).
+(except of _modules/grid.py_ and _modules/occupancy_grid.py_ which are written by us).
 
 ## Algorithm
-_VIRUS-NeRF_ is based on _Instant-NGP_: Instant neural graphics primitives with a multiresolution hash encoding; Müller, Thomas and Evans, 
-Alex and Schied, Christoph and Keller, Alexander; ACM Transactions on Graphics (ToG); Year: 2022
+_VIRUS-NeRF_ is based on Instant-NGP: Müller, T., Evans, 
+A., Schied, C., and Keller, A. (2022). _Instant neural graphics primitives with a multiresolution hash encoding_. ACM Transactions on Graphics (ToG).
  
