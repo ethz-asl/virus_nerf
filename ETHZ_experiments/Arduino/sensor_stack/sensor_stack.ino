@@ -20,8 +20,8 @@
 #include <Wire.h>
 #include <ros.h>
 #include <ros/time.h>
-#include <sensors/USS.h>
-#include <sensors/TOF.h>
+// #include <sensors/USS.h>
+// #include <sensors/TOF.h>
 #include <SparkFun_VL53L5CX_Library.h> //http://librarymanager/All#SparkFun_VL53L5CX
 
 
@@ -30,7 +30,7 @@
 */
 
 // General
-//#define PRINT_DATA // comment this line to disable printing
+#define PRINT_DATA // comment this line to disable printing
 
 // USS
 #define USS_TRIGGER_PIN        0
@@ -67,19 +67,19 @@
 */
 
 // ROS
-ros::NodeHandle nh;
-sensors::USS uss_msg_1;
-sensors::USS uss_msg_2;
-sensors::USS uss_msg_3;
-sensors::TOF tof_msg_1;
-sensors::TOF tof_msg_2;
-sensors::TOF tof_msg_3;
-ros::Publisher uss_pub_1(USS_ID_1, &uss_msg_1);
-ros::Publisher uss_pub_2(USS_ID_2, &uss_msg_2);
-ros::Publisher uss_pub_3(USS_ID_3, &uss_msg_3);
-ros::Publisher tof_pub_1(TOF_ID_1, &tof_msg_1);
-ros::Publisher tof_pub_2(TOF_ID_2, &tof_msg_2);
-ros::Publisher tof_pub_3(TOF_ID_3, &tof_msg_3);
+// ros::NodeHandle nh;
+// sensors::USS uss_msg_1;
+// sensors::USS uss_msg_2;
+// sensors::USS uss_msg_3;
+// sensors::TOF tof_msg_1;
+// sensors::TOF tof_msg_2;
+// sensors::TOF tof_msg_3;
+// ros::Publisher uss_pub_1(USS_ID_1, &uss_msg_1);
+// ros::Publisher uss_pub_2(USS_ID_2, &uss_msg_2);
+// ros::Publisher uss_pub_3(USS_ID_3, &uss_msg_3);
+// ros::Publisher tof_pub_1(TOF_ID_1, &tof_msg_1);
+// ros::Publisher tof_pub_2(TOF_ID_2, &tof_msg_2);
+// ros::Publisher tof_pub_3(TOF_ID_3, &tof_msg_3);
 
 // USS
 volatile bool uss_interrupt_flag_1 = false;
@@ -91,9 +91,9 @@ volatile uint32_t uss_echo_start_3 = micros();
 volatile uint32_t uss_echo_end_1 = micros();
 volatile uint32_t uss_echo_end_2 = micros();
 volatile uint32_t uss_echo_end_3 = micros();
-ros::Time uss_interrupt_time_1 = nh.now();
-ros::Time uss_interrupt_time_2 = nh.now();
-ros::Time uss_interrupt_time_3 = nh.now();
+// ros::Time uss_interrupt_time_1 = nh.now();
+// ros::Time uss_interrupt_time_2 = nh.now();
+// ros::Time uss_interrupt_time_3 = nh.now();
 
 // ToF
 SparkFun_VL53L5CX tof_imager_1;
@@ -105,9 +105,9 @@ VL53L5CX_ResultsData tof_data_3; // Result data class structure, 1356 byes of RA
 bool tof_interrupt_flag_1 = false;
 bool tof_interrupt_flag_2 = false;
 bool tof_interrupt_flag_3 = false;
-ros::Time tof_interrupt_time_1 = nh.now();
-ros::Time tof_interrupt_time_2 = nh.now();
-ros::Time tof_interrupt_time_3 = nh.now();
+// ros::Time tof_interrupt_time_1 = nh.now();
+// ros::Time tof_interrupt_time_2 = nh.now();
+// ros::Time tof_interrupt_time_3 = nh.now();
 
 // Testing
 volatile bool uss_new_meas_flag_1 = true;
@@ -188,23 +188,23 @@ void tof_initSensor(SparkFun_VL53L5CX *imager, int address, int i2c_reset_pin) {
   }
 }
 
-void uss_publishMeas(ros::Publisher *pub, sensors::USS *msg, uint32_t echo_duration, 
-                      char *id, ros::Time *time) {
-  msg->header.stamp = *time;
-  msg->header.frame_id = id;
-  msg->meas = echo_duration;
-  pub->publish( msg );
-}
+// void uss_publishMeas(ros::Publisher *pub, sensors::USS *msg, uint32_t echo_duration, 
+//                       char *id, ros::Time *time) {
+//   msg->header.stamp = *time;
+//   msg->header.frame_id = id;
+//   msg->meas = echo_duration;
+//   pub->publish( msg );
+// }
 
-void tof_publishMeas(ros::Publisher *pub, sensors::TOF *msg, VL53L5CX_ResultsData *data, 
-                      char *id, ros::Time *time) {
-  msg->header.stamp = *time;
-  msg->header.frame_id = id;
-  for(int i=0; i<TOF_IMG_RES; i++) {
-    msg->meas[i] = data->distance_mm[i];
-  }
-  pub->publish( msg );
-}
+// void tof_publishMeas(ros::Publisher *pub, sensors::TOF *msg, VL53L5CX_ResultsData *data, 
+//                       char *id, ros::Time *time) {
+//   msg->header.stamp = *time;
+//   msg->header.frame_id = id;
+//   for(int i=0; i<TOF_IMG_RES; i++) {
+//     msg->meas[i] = data->distance_mm[i];
+//   }
+//   pub->publish( msg );
+// }
 
 void uss_printMeas(uint32_t echo_duration, char *id) {
   float distance_cm = (float)echo_duration / 50;
@@ -321,7 +321,7 @@ void loop()
     uss_new_meas_flag_1 = true;
 
     uint32_t echo_duration = uss_echo_end_1 - uss_echo_start_1;
-    uss_publishMeas(&uss_pub_1, &uss_msg_1, echo_duration, USS_ID_1, &uss_interrupt_time_1);
+    // uss_publishMeas(&uss_pub_1, &uss_msg_1, echo_duration, USS_ID_1, &uss_interrupt_time_1);
 #ifdef PRINT_DATA
     uss_printMeas(echo_duration, USS_ID_1);
 #endif
@@ -332,7 +332,7 @@ void loop()
     uss_new_meas_flag_2 = true;
 
     uint32_t echo_duration = uss_echo_end_2 - uss_echo_start_2;
-    uss_publishMeas(&uss_pub_2, &uss_msg_2, echo_duration, USS_ID_2, &uss_interrupt_time_2);
+    // uss_publishMeas(&uss_pub_2, &uss_msg_2, echo_duration, USS_ID_2, &uss_interrupt_time_2);
 #ifdef PRINT_DATA
     uss_printMeas(echo_duration, USS_ID_2);
 #endif
@@ -343,7 +343,7 @@ void loop()
     uss_new_meas_flag_3 = true;
 
     uint32_t echo_duration = uss_echo_end_3 - uss_echo_start_3;
-    uss_publishMeas(&uss_pub_3, &uss_msg_3, echo_duration, USS_ID_3, &uss_interrupt_time_3);
+    // uss_publishMeas(&uss_pub_3, &uss_msg_3, echo_duration, USS_ID_3, &uss_interrupt_time_3);
 #ifdef PRINT_DATA
     uss_printMeas(echo_duration, USS_ID_3);
 #endif
@@ -353,7 +353,7 @@ void loop()
     tof_interrupt_flag_1 = false;
 
     if (tof_imager_1.getRangingData(&tof_data_1)) { //Read distance data into array
-      tof_publishMeas(&tof_pub_1, &tof_msg_1, &tof_data_1, TOF_ID_1, &tof_interrupt_time_1);
+      // tof_publishMeas(&tof_pub_1, &tof_msg_1, &tof_data_1, TOF_ID_1, &tof_interrupt_time_1);
       tof_printMeas(&tof_data_1, TOF_ID_1);
 #ifdef PRINT_DATA
       tof_printMeas(&tof_data_1, TOF_ID_1);
@@ -365,7 +365,7 @@ void loop()
     tof_interrupt_flag_2 = false;
 
     if (tof_imager_2.getRangingData(&tof_data_2)) { //Read distance data into array
-      tof_publishMeas(&tof_pub_2, &tof_msg_2, &tof_data_2, TOF_ID_2, &tof_interrupt_time_2);
+      // tof_publishMeas(&tof_pub_2, &tof_msg_2, &tof_data_2, TOF_ID_2, &tof_interrupt_time_2);
 #ifdef PRINT_DATA
       tof_printMeas(&tof_data_2, TOF_ID_2);
 #endif
@@ -376,7 +376,7 @@ void loop()
     tof_interrupt_flag_3 = false;
 
     if (tof_imager_3.getRangingData(&tof_data_3)) { //Read distance data into array
-      tof_publishMeas(&tof_pub_3, &tof_msg_3, &tof_data_3, TOF_ID_3, &tof_interrupt_time_3);
+      // tof_publishMeas(&tof_pub_3, &tof_msg_3, &tof_data_3, TOF_ID_3, &tof_interrupt_time_3);
 #ifdef PRINT_DATA
       tof_printMeas(&tof_data_3, TOF_ID_3);
 #endif
