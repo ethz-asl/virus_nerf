@@ -1,0 +1,2 @@
+train,val,test,keep_N_observations,info
+0.6,0.0,0.4,all,This file contains the split ratios for this dataset. 
