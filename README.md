@@ -25,6 +25,9 @@ Overall, _VIRUS-NeRF_ presents a promising approach for cost-effective local map
 2. Clone this repository
 3. Make sure that the requirements indicated in _requirements.txt_ are met
 
+### Sample Dataset
+* Contains one second of the ETHZ-office dataset (see _sample_dataset_).
+
 ### Dataset Collection
 1. Install ROS1
 2. Create a catkin workspace in _USS_experiments/catkin_ws_
