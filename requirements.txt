@@ -19,4 +19,4 @@ scipy==1.12.0
 taichi_nightly==1.7.0.post20230921
 torch==2.0.1
 torchmetrics==1.1.2
-tqdm==4.65.0
+tqdm==4.66.3
