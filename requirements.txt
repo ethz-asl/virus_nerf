@@ -17,6 +17,6 @@ pyserial==3.5
 robotathome==1.1.9
 scipy==1.12.0
 taichi_nightly==1.7.0.post20230921
-torch==2.0.1
+torch==2.2.0
 torchmetrics==1.1.2
 tqdm==4.66.3
